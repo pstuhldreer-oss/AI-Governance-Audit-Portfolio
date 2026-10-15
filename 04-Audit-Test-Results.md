@@ -56,3 +56,41 @@ These results provide initial evidence of control functionality but do not demon
 - NIST SP 800-53 Rev. 5 – Security and Privacy Controls.
 - NIST AI Risk Management Framework 1.0.
 - OWASP guidance on AI and LLM security.
+
+
+## TEST-07 – Agent Identity & Delegation Controls
+
+**Execution date:** 2026-10-15  
+**Result:** PASS (4/4 scenarios)  
+**Environment:** Google Colab, Python 3  
+**Test data:** Synthetic
+
+### Objective
+Verify that the simulated agent authorization mechanism
+enforces identity matching, permitted actions and
+delegation expiration.
+
+### Test Results
+| Scenario | Expected | Result |
+|---|---|---|
+| Authorized agent | ALLOW | PASS |
+| Unknown agent | DENY | PASS |
+| Unauthorized action | DENY | PASS |
+| Expired delegation | DENY | PASS |
+
+### Audit Evidence
+- Four authorization events recorded.
+- Each event contains an event ID, agent ID,
+  action, decision and timestamp.
+- All assertions passed.
+
+### Limitations
+This is a deterministic proof of concept.
+It does not implement cryptographic identity
+verification, delegation-chain validation,
+tamper-resistant logs or production authentication.
+
+### Conclusion
+The prototype passed the four defined authorization
+scenarios. Additional security testing is required
+before any operational deployment.
