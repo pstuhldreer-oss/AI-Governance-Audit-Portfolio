@@ -94,3 +94,31 @@ tamper-resistant logs or production authentication.
 The prototype passed the four defined authorization
 scenarios. Additional security testing is required
 before any operational deployment.
+## TEST-08 — Audit Trail Integrity
+
+**Execution date:** 2026-10-16
+**Result:** PASS (4/4 scenarios)
+**Environment:** Google Colab, Python 3
+**Test data:** Synthetic
+
+### Objective
+Verify that the prototype detects unauthorized changes to an SHA-256 hash-linked audit log.
+
+### Test Results
+| Scenario | Expected | Result |
+|---|---|---|
+| Original audit chain | VALID | PASS |
+| Modified audit event | DETECT | PASS |
+| Deleted middle event | DETECT | PASS |
+| Reordered events | DETECT | PASS |
+
+### Audit Evidence
+- Three synthetic audit events created.
+- SHA-256 hashes link consecutive events.
+- All four assertions passed.
+
+### Limitations
+This is a deterministic proof of concept, not a production-grade tamper-resistant audit system. It does not independently detect removal of the final event or an attacker recomputing the entire hash chain. Independent checkpoints, protected storage and stronger verification would be required for production.
+
+### Conclusion
+The prototype passed all four defined integrity test scenarios. Further security validation is required before operational deployment.
